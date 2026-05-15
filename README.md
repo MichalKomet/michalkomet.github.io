@@ -1,3 +1,0 @@
-# michalkomet.github.io
-
-Testing...
