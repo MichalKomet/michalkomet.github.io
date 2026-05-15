@@ -5,70 +5,214 @@
     <title>Raport - Marzec</title>
 </head>
 <body>
-    <h1>Raport - Marzec</h1>
+    <h1>Raport - Kwiecień</h1>
 
     <div>
-        <h2>Wybrane narzędzia programistyczne</h2>
-
-        <ul>
-            <li>
-                STM32CubeIDE
-            </li>
-            <li>
-                STM32CubeMX
-            </li>
-            <li>
-                STM32CubeProgrammer
-            </li>
-            <li>
-                PulseView
-            </li>
-        </ul>
-    </div>
-
-    <div>
-        <h2>Podział zadań</h2>
+        <h3>Test STM32</h3>
+        <img src="img/IMG_3884.jpeg" width="400" height="600">
         <div>
-            <h3>Michał Gwoździej</h3>
-            <ul>
-                <li>
-                    Fizyczne kompletowanie elektronicznych komponentów
-                </li>
-                <li>
-                    Testy elektroniki
-                </li>
-                <li>
-                    Fizyczne łączenie komponentów
-                </li>
-            </ul>
-        </div>
-        <div>
-            <h3>Julia Nosarzewska</h3>
-            <ul>
-                <li>
-                    Tworzenie oprogramowania
-                </li>
-                <li>
-                     Symulacje
-                </li>
-                <li>
-                    Research programistyczny
-                </li>
-            </ul>
+            Dokonaliśmy pierwszych testów związanych z mikrokontrolerem STM32 NUCLEO H755ZI-Q.
+            Odpowiednio skonfigurowaliśmy STMkę za pomocą oprogramowania STM32CubeMX generując projekt testowy
+            w ramach którego sprawdziliśmy możliwości związane z kontrolą płytki.
+            Dopiero po przeprowadzeniu prostych testów kontynuowaliśmy dalsze działania projektowe.
         </div>
     </div>
 
     <div>
-        <h2>Podsumowanie postępów prac</h2>
+        <h3>Płytka ESC</h3>
+        <img src="img/IMG_3895.jpeg" width="400" height="600">
+        <div>
+            Płytkę 4IN1 ESC wyposażyliśmy w źródło zasilania zabezpieczone kondensatorem w celu uchrony przed skokami napięcia
+            oraz dołączyliśmy do każdego z czterech portów silniczki BLDC 1503. Nie przeprowadzaliśmy testów z użyciem docelowego
+            akumulatora LiPo ze względu na opóźnioną dostawę bezpiecznika "smoke stopper", natomiast testy niższym napięciem wykazują
+            iż cały układ zachowuje się w sposób poprawny.
+        </div>
+    </div>
 
-        W marcu nasze działania skupiły się głównie na zbieraniu potrzebnej wiedzy w zakresie komponentów elektronicznych niezbędnych do wykonania projektu oraz ich kompletowaniu.
-        Początkowo mieliśmy plan by jak najbardziej wykorzystać elektronikę z recyklingu jednak bardzo szybko ich użyteczność została zweryfikowana przez rzeczywistość.
-        Zamierzaliśmy wykorzystać przykładowo starą podkładkę chłodzącą pod laptopa i jego wentylatory do budowy śmigieł jednak ze względu na ich budowę oraz parametry nie okazały się generować wystarczającej siły ciągu w zakresie napięć generowanych STM32.
-        Z tego też względu dokonaliśmy duży przegląd już istniejących projektów w internecie by skompletować naszym zdaniem niezbędne minimum do stworzenia minimalnie działającego projektu.
-        Zakupiliśmy zestaw polikarbonowych trójpłatowych śmigieł pięciocalowych o niskiej wadze oraz cztery silniczki BLDC 1503.
-        Zostały też zakupione cztery płytki sterowników do silników BLDC celem precyzyjnej ich obsługi oraz akumulator LiPO 1500 mAh 14.8V.
-        Skompletowaliśmy także zestaw niezbędnych czujników do zbierania danych do późniejszej kontroli całego drona, mianowicie BMP390, czyli moduł precyzyjnego czujnika ciśnienia atmosferycznego, oraz ICM42688P, czyli moduł sześcioosiowego czujnika orientacji (żyroskop).
-        Poza tym jako rzecz najważniejszą zakupiliśmy płytkę STM32 NUCLEO-H755ZI-Q będącego hardwarem naszego projektu. W oczekiwaniu na wszystkie zamówione komponenty gromadziliśmy wiedzę na temat technologii i bibliotek, które moglibyśmy wykorzystać do poprawnego funkcjonowania naszego projektu.
+    <div>
+        <h3>Testy czujników</h3>
+
+        <div>
+            <strong>ICM42688P</strong>
+            Udało nam się uzyskać połączenie między STM32 a czujnikiem otrzymując poprawny kod identyfikacyjny (tzw. "WHO_AM_I").
+            Dokonaliśmy kilku testów celem określenia możliwości danego czujnika potwierdzając tym samym jego planowaną użyteczność.
+            Żyroskop jest gotowy do aktywnego pilnowania poziomu drona w locie.
+        </div>
+
+        <div>
+            <strong>BMP390</strong>
+            Udało nam się uzyskać połączenie z czujnikiem i odczytać za jego pomocą ciśnienie.
+            Przeprowadziliśmy kilka prostych testów polegających na wertykalnej zmianie położenia czujnika
+            obserwując na ekranie komputera zmianę odczytywanych parametrów zgodnie z ruchem.
+            Potwierdza to całkowicie przewidywaną użyteczność czujnika w projekcie.
+        </div>
+
+        <div>
+            <strong>VL53L1X</strong>
+            Postanowiliśmy również zaopatrzeć się w laserowy czujnik odległości celem zwiększenia bezpieczeństwa prototypu
+            związanego ze strumieniem większej ilości danych na żywo. Uzyskaliśmy połączenie z czujnikiem
+            oraz przetestowaliśmy poprawność mierzonej odległości. Ten czujnik będzie kluczowy przy bezpiecznym
+            wykonaniu manewru lądowania by prototyp wiedział kiedy dotyka ziemi.
+        </div>
+    </div>
+
+    <div>
+        <h3>Przypadki użycia</h3>
+        <img src="img/UML.jpg" width="400" height="600">
+
+        <div>
+            <h4>Start</h4>
+            <strong>Cel:</strong> Uniesienie się drona na bezpieczną wysokość.
+            <ul>
+                <li>
+                    <strong>Kto uruchamia:</strong>
+                    Operator
+                </li>
+                <li>
+                    <strong>Warunki początkowe:</strong>
+                    Silniki są już uzbrojone i kręcą się na najniższych obrotach
+                </li>
+                <li>
+                    <strong>Scenariusz główny:</strong>
+                    <ol>
+                        <li>Operator wybiera funkcję startu</li>
+                        <li>
+                            Mikrokontroler zwiększa moc silników, korzystając z czujnika ciśnienia BMP390, aby
+                            określać swoje położenie
+                        </li>
+                    </ol>
+                </li>
+                <li>
+                    <strong>Scenariusze alternatywne:</strong>
+                    Jeśli dron nie może się wzbić mimo zwiększania mocy, system przerywa start
+                </li>
+                <li>
+                    <strong>Sytuacje błędne:</strong>
+                    Jeśli bateria jest zbyt słaba, dron przerwie start i nie oderwie się od ziemi
+                </li>
+                <li>
+                    <strong>Warunki zakończenia:</strong>
+                    Dron wisi stabilnie na ustalonej wysokości nad ziemią
+                </li>
+            </ul>
+        </div>
+
+        <div>
+            <h4>Lot testowy</h4>
+            <strong>Cel:</strong> Uniesienie się drona na bezpieczną wysokość.
+            <ul>
+                <li>
+                    <strong>Kto uruchamia:</strong>
+                    Operator
+                </li>
+                <li>
+                    <strong>Warunki początkowe:</strong>
+                    Dron znajduje się w locie stabilnym
+                </li>
+                <li>
+                    <strong>Scenariusz główny:</strong>
+                    <ol>
+                        <li>
+                            Operator przesyła sygnały sterownicze
+                        </li>
+                        <li>
+                            STM32 przelicza sygnały na zmianę obrotów czterech silników
+                        </li>
+                        <li>
+                            Dane z żyroskopu ICM42688P są używane do zachowania równowagi
+                        </li>
+                    </ol>
+                </li>
+                <li>
+                    <strong>Scenariusze alternatywne:</strong>
+                    Dron przechodzi w tryb powolnego dryfu, jeśli operator zaprzestanie podawania sygnałów sterujących
+                </li>
+                <li>
+                    <strong>Sytuacje błędne:</strong>
+                    Utrata sygnału od operatora – uruchomienie procedury powrotu lub lądowania
+                </li>
+                <li>
+                    <strong>Warunki zakończenia:</strong>
+                    Operator kończy manewry testowe
+                </li>
+            </ul>
+        </div>
+
+        <div>
+            <h4>Lądowanie</h4>
+            <strong>Cel:</strong> Bezpieczne posadzenie drona na ziemi
+            <ul>
+                <li>
+                    <strong>Kto uruchamia:</strong>
+                    Operator
+                </li>
+                <li>
+                    <strong>Warunki początkowe:</strong>
+                    Dron unosi się w powietrzu
+                </li>
+                <li>
+                    <strong>Scenariusz główny:</strong>
+                    <ol>
+                        <li>
+                            Operator przesyła komendę lądowania
+                        </li>
+                        <li>
+                            STM32 powoli obniża obroty silników sugerując się danymi z czujnika VL53L1X
+                        </li>
+                        <li>
+                            Czujnik BMP390 wykrywa brak zmiany wysokości po kontakcie z ziemią
+                        </li>
+                    </ol>
+                </li>
+                <li>
+                    <strong>Scenariusze alternatywne:</strong>
+                    Operator może przerwać lądowanie i poderwać drona w górę w dowolnym momencie
+                </li>
+                <li>
+                    <strong>Sytuacje błędne:</strong>
+                    Wykrycie silnego wstrząsu przy kontakcie z ziemią – natychmiastowe odcięcie zasilania silników
+                </li>
+                <li>
+                    <strong>Warunki zakończenia:</strong>
+                    Silniki zostają całkowicie wyłączone
+                </li>
+            </ul>
+        </div>
+
+        <div>
+            <h4>Stabilizacja lotu</h4>
+            <strong>Cel:</strong> Automatyczne korygowanie pozycji drona w locie
+            <ul>
+                <li>
+                    <strong>Działanie:</strong>
+                    Ten przypadek jest zawart w starcie, locie i lądowaniu
+                </li>
+                <li>
+                    <strong>Warunki początkowe:</strong>
+                    Dron unosi się w powietrzu
+                </li>
+                <li>
+                    <strong>Scenariusz główny:</strong>
+                    <ol>
+                        <li>
+                            STM32 zbiera dane z żyroskopu ICM42688P o każdym najmniejszym przechyleniu
+                        </li>
+                        <li>
+                            Procesor oblicza potrzebną korektę mocy dla każdego silniczka osobno
+                        </li>
+                        <li>
+                            System nanosi poprawki w trybie rzeczywistym szybciej, niż zdąży to zauważyć ludzkie oko
+                        </li>
+                    </ol>
+                </li>
+                <li>
+                    <strong>Sytuacje błędne:</strong>
+                    Uszkodzenie czujnika ICM42688P powoduje uruchomienie procedury powrotu lub lądowania
+                </li>
+            </ul>
+        </div>
+
+
     </div>
 </body>
 </html>
